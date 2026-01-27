@@ -1,11 +1,10 @@
+﻿
 # Name,     Type,  SubType,  Offset,    Size,     Flags
-nvs,        data,  nvs,      0x9000,    0x6000,
-otadata,    data,  ota,      0xf000,    0x2000,
-phy_init,   data,  phy,      0x11000,   0x1000,
-# Fijamos el inicio en 0x20000 para dejar espacio al bootloader (primeros 128K)
-factory,    app,   factory,  0x20000,   1280K,
-# A partir de aquí, el sistema calcula el offset óptimo
-ota_0,      app,   ota_0,    ,          1280K,
-ota_1,      app,   ota_1,    ,          1280K,
-lua_fs,     data,  spiffs,   ,          512K,
-storage,    data,  spiffs,   ,          2560K,
+nvs,        data,  nvs,      0x9000,    24K,
+otadata,    data,  ota,      0xf000,    8K,
+phy_init,   data,  phy,      0x11000,   4K,
+factory,    app,   factory,  0x20000,   1536K,
+ota_0,      app,   ota_0,    0x1A0000,  1536K,
+ota_1,      app,   ota_1,    0x320000,  1536K,
+main,     data,  littlefs, 0x4A0000,  1024K,
+storage,    data,  littlefs, 0x5A0000,  2048K,

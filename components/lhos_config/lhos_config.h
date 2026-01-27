@@ -2,6 +2,7 @@
 #define LHOS_CONFIG_H
 
 #include <stdbool.h>
+#include <stdint.h>
 
 void lhos_config_init (void);
 bool lhos_config_lua_enabled (void);
@@ -42,5 +43,28 @@ const char *lhos_config_target (void);
 #define LHOS_GPIO_RS232_2_RX 42  // RS232_2 Rx - J5.I/O-3
 #define LHOS_GPIO_RS232_2_TX 41  // RS232_2 Tx - J5.I/O-4
 #define LHOS_GPIO_LED 48         // RGB LED PORT
+
+// LED color definitions
+typedef enum
+{
+  LHOS_LED_OFF = 0,
+  LHOS_LED_RED,
+  LHOS_LED_GREEN,
+  LHOS_LED_BLUE,
+  LHOS_LED_WHITE,
+  LHOS_LED_YELLOW,
+  LHOS_LED_CYAN,
+  LHOS_LED_MAGENTA
+} lhos_led_color_t;
+
+// Color table for RGB LED (common anode: 0=on, 1=off)
+typedef struct
+{
+  uint8_t r;
+  uint8_t g;
+  uint8_t b;
+} lhos_led_rgb_t;
+
+extern const lhos_led_rgb_t lhos_led_color_table[];
 
 #endif /* LHOS_CONFIG_H */

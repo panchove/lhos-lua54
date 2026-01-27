@@ -6,6 +6,7 @@
 void lhos_lua_init (void);
 int lhos_lua_run_script (const char *script);
 bool lhos_lua_enabled (void);
+void lhos_lua_scheduler_run (void);
 
 /*
  * Configuration macros to guide the lhos Lua allocator.
