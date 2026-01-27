@@ -15,3 +15,20 @@ sdkconfig
 # Misc
 *.log
 *.pyc
+# ESP-IDF, lhOS, y carpetas de build/entorno
+build/
+component_build/
+out/
+managed_components/
+tools/dist/
+tools/__pycache__/
+log/
+partition_table/
+littlefs_py_venv/
+.idea/
+*.iml
+tests/unity/build/
+tests/unity/*.log
+secrets.env
+components/lua54/
+
