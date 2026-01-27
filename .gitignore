@@ -1,0 +1,17 @@
+# Build outputs
+build/
+out/
+component_build/
+CMakeCache.txt
+cmake_install.cmake
+
+# IDF
+sdkconfig
+
+# Editor
+.vscode/
+*.swp
+
+# Misc
+*.log
+*.pyc

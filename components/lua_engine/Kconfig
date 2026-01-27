@@ -1,0 +1,21 @@
+menu "Lua Engine"
+
+config LUA_ENABLED
+    bool "Enable Lua runtime"
+    default y
+    help
+      Enable embedding the Lua 5.4 runtime into the application. This
+      controls compilation of the Lua engine component and related
+      bindings.
+
+config LUA_USE_SPIRAM
+    bool "Allocate Lua heap in SPIRAM when available"
+    depends on LUA_ENABLED && SPIRAM
+    default y
+    help
+      When set, the Lua runtime will prefer allocating its heap in
+      external SPIRAM using MALLOC_CAP_SPIRAM. The Lua allocator in
+      the component should check this option and use pvPortMallocCaps
+      appropriately.
+
+endmenu
