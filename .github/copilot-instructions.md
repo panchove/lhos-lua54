@@ -34,7 +34,13 @@ Eres un Ingeniero Senior especializado en Sistemas Operativos Embebidos. Tu obje
 - **Testing:** Generar unit tests basados en el framework **Unity** de ESP-IDF.
 
 ## 6. Comandos de Entorno (PowerShell)
-**Nota:** Antes de ejecutar cualquier comando `idf.py`, se debe ejecutar `export.ps1` para configurar el entorno de ESP-IDF.
+**Nota:** Antes de ejecutar cualquier comando `idf.py`, ejecuta el script de entorno en PowerShell usando:
+
+```powershell
+export.ps1
+```
+
+Esto asegura que las variables de entorno necesarias (por ejemplo `IDF_PYTHON_ENV_PATH` y `IDF_PATH`) queden definidas para los comandos siguientes. Después puedes ejecutar:
 - **Compilar:** `idf.py build`
 - **Flashear:** `idf.py -p COMx flash monitor`
 - **Tests:** `Run-Tests.ps1 -TestType unit`

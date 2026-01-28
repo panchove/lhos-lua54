@@ -3,17 +3,13 @@
 
 static const char *TAG = "LHOS_CONFIG";
 
-// Color table for RGB LED (common anode: 0=on, 1=off)
-const lhos_led_rgb_t lhos_led_color_table[] = {
-  { 1, 1, 1 }, // OFF
-  { 0, 1, 1 }, // RED
-  { 1, 0, 1 }, // GREEN
-  { 1, 1, 0 }, // BLUE
-  { 0, 0, 0 }, // WHITE
-  { 0, 0, 1 }, // YELLOW
-  { 1, 0, 0 }, // CYAN
-  { 0, 1, 0 }  // MAGENTA
-};
+/* Legacy lhos_led_color_table removed; use lhos_palette_rgb24 or
+   direct WS2812 API with packed RGB24 (0xRRGGBB). */
+
+/* 16-color palette (RGB24 values) - matches Lua `config.led.palette` ordering
+ */
+/* Palette array removed; use LHOS_PAL_* macros or Lua-side palette in
+  main/lua_fs/scripts/config.lua if needed. */
 
 void
 lhos_config_init (void)

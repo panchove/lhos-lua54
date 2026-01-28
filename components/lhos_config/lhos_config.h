@@ -44,27 +44,29 @@ const char *lhos_config_target (void);
 #define LHOS_GPIO_RS232_2_TX 41  // RS232_2 Tx - J5.I/O-4
 #define LHOS_GPIO_LED 48         // RGB LED PORT
 
-// LED color definitions
-typedef enum
-{
-  LHOS_LED_OFF = 0,
-  LHOS_LED_RED,
-  LHOS_LED_GREEN,
-  LHOS_LED_BLUE,
-  LHOS_LED_WHITE,
-  LHOS_LED_YELLOW,
-  LHOS_LED_CYAN,
-  LHOS_LED_MAGENTA
-} lhos_led_color_t;
+/* Legacy LED typedefs and color table removed; use RGB24 palette
+   `lhos_palette_rgb24` or WS2812 API that accepts packed 0xRRGGBB values. */
 
-// Color table for RGB LED (common anode: 0=on, 1=off)
-typedef struct
-{
-  uint8_t r;
-  uint8_t g;
-  uint8_t b;
-} lhos_led_rgb_t;
+/* 16-color palette in RGB24 format (0xRRGGBB) - mirrors Lua
+ * `config.led.palette` */
+#define LHOS_PAL_BLACK 0x000000
+#define LHOS_PAL_RED 0x800000
+#define LHOS_PAL_GREEN 0x008000
+#define LHOS_PAL_YELLOW 0x808000
+#define LHOS_PAL_BLUE 0x000080
+#define LHOS_PAL_MAGENTA 0x800080
+#define LHOS_PAL_CYAN 0x008080
+#define LHOS_PAL_WHITE 0xC0C0C0
+#define LHOS_PAL_BBLACK 0x808080
+#define LHOS_PAL_BRED 0xFF0000
+#define LHOS_PAL_BGREEN 0x00FF00
+#define LHOS_PAL_BYELLOW 0xFFFF00
+#define LHOS_PAL_BBLUE 0x0000FF
+#define LHOS_PAL_BMAGENTA 0xFF00FF
+#define LHOS_PAL_BCYAN 0x00FFFF
+#define LHOS_PAL_BWHITE 0xFFFFFF
 
-extern const lhos_led_rgb_t lhos_led_color_table[];
+/* Palette array not exported; use LHOS_PAL_* macros or caller-managed arrays
+ */
 
 #endif /* LHOS_CONFIG_H */

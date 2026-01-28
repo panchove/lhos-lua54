@@ -6,8 +6,17 @@
 - Python para esptool.
 - ESP32-S3 con 8MB Flash.
 
+- Se recomienda habilitar PSRAM en `idf.py menuconfig` y asignar el heap de Lua a PSRAM (`MALLOC_CAP_SPIRAM`) para mejorar la memoria disponible para scripts.
+
 ## Configuración del Entorno
 1. Ejecuta `export.ps1` en el directorio del proyecto para configurar ESP-IDF.
+
+Ejemplo PowerShell (rápido):
+
+```powershell
+& 'C:\Espressif\frameworks\esp-idf-v5.5.2\export.ps1'
+idf.py build
+```
 
 ## Build
 1. `idf.py build`: Compila el proyecto. Genera `lhos-lua54.bin` y `main.bin` (imagen LittleFS).

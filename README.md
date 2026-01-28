@@ -5,6 +5,12 @@ Resumen rápido:
 - Plataforma: ESP32-S3 (ESP-IDF 5.5.2)
 - Objetivo: Microkernel lhOS con runtime Lua 5.4 (estructura inicial)
 
+## Novedades (v0.1.0)
+
+- Añadido componente `lhos_post` y binding Lua `post` para obtener el estado POST desde scripts.
+- Nuevos bindings: `posix` (operaciones de fichero) y `led` (control WS2812b) expuestos a Lua.
+- Limpieza: `components/lua54` ahora es manejado localmente/ignorado para desarrollos locales.
+
 Comandos útiles (PowerShell):
 
 ```powershell

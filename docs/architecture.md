@@ -65,6 +65,10 @@ package "Componentes lhOS" {
     [lua_engine] as Engine
 }
 
+### Power On Self Test (POST)
+
+El componente `lhos_post` realiza comprobaciones básicas de salud del sistema durante el arranque (RAM libre mínima, presencia de PSRAM, estado conservador de flash/NVS/GPIO/WiFi/BLE). Los resultados se exponen a Lua mediante el binding `post` (`post.send()` / `post.receive()`), que devuelve una tabla con flags booleanos para cada chequeo. El diseño mantiene las comprobaciones en C y entrega resultados al runtime de Lua a través del dispatcher para evitar callbacks directos desde IRQs o contextos no seguros.
+
 ESP --> Core0
 ESP --> Core1
 

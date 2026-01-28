@@ -26,6 +26,32 @@ El script `post_soft.lua` verifica:
 
 Si falla, loggea errores.
 
+### Ejemplo: usar `post` desde Lua
+
+```lua
+-- Obtener status desde el binding C
+local status = post.send()
+if not status then
+	print("POST: no disponible")
+else
+	print("RAM OK:", status.ram_ok)
+	print("PSRAM OK:", status.psram_ok)
+end
+```
+
+### Ejemplo rápido: `posix` y `led`
+
+```lua
+-- Posix: leer un archivo
+local fd = posix.open('/lfs/config.txt', 'r')
+local data = posix.read(fd, 512)
+posix.close(fd)
+
+-- LED WS2812b
+led.set(1, {r=0,g=255,b=0}) -- enciende verde
+led.flash(1, 1000)
+```
+
 ## Asincronía
 Usa `lhos.yield()` en loops para no bloquear.
 
