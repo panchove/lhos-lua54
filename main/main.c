@@ -11,7 +11,6 @@
 #include "lhos.h"
 #include "lhos_config.h"
 #include "lhos_lua.h"
-#include "lhos_post.h"
 #include "lhos_ws2812b.h"
 #include <sys/stat.h>
 
@@ -72,25 +71,8 @@ app_main (void)
   // lhos_ws2812b_init (); // TEMPORARILY DISABLED FOR DEBUG
   ESP_LOGI (TAG, "WS2812B LED initialized (disabled)");
 
-  /* Indicate POST in progress via RGB LED */
-  ESP_LOGI (TAG, "Starting hardware POST...");
-  // lhos_post_led_indicate (NULL); // TEMPORARILY DISABLED - LED not
-  // initialized
-  /* Perform hardware POST */
-  lhos_post_status_t post_status;
-  esp_err_t post_result = lhos_post_hardware (&post_status);
-  if (post_result != ESP_OK)
-    {
-      ESP_LOGE (TAG, "Hardware POST failed! System may be unstable.");
-    }
-  else
-    {
-      ESP_LOGI (TAG, "Hardware POST passed.");
-    }
-
-  /* Indicate POST status via LEDs */
-  // lhos_post_led_indicate (&post_status); // TEMPORARILY DISABLED - LED not
-  // initialized
+  /* POST disabled: component removed in this build */
+  ESP_LOGI (TAG, "POST disabled in this build");
 
   ESP_LOGI (TAG, "Initializing config...");
   lhos_config_init ();

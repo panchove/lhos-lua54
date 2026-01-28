@@ -1,45 +1,74 @@
 ########################################
+# Target & Architecture
+########################################
+CONFIG_IDF_TARGET="esp32s3"
+CONFIG_IDF_TARGET_ESP32S3=y
+CONFIG_IDF_TARGET_ARCH_XTENSA=y
+
+########################################
+# PSRAM / SPIRAM (Octal Mode S3)
+########################################
+CONFIG_SPIRAM=y
+CONFIG_SPIRAM_BOOT_INIT=y
+CONFIG_SPIRAM_TYPE_AUTO=y
+CONFIG_SPIRAM_MODE_OCT=y
+CONFIG_SPIRAM_SPEED_40M=y
+CONFIG_SPIRAM_USE_MALLOC=y
+CONFIG_SPIRAM_MALLOC_RESERVE_INTERNAL=32768
+CONFIG_SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY=y
+
+########################################
+# LUA VM Runtime Optimization
+########################################
+CONFIG_LUA_ENABLED=y
+CONFIG_LUA_USE_SPIRAM=y
+
+########################################
 # Bluetooth (NimBLE Stack)
 ########################################
 CONFIG_BT_ENABLED=y
+CONFIG_BT_CONTROLLER_ENABLED=y
 CONFIG_BT_NIMBLE_ENABLED=y
-# NimBLE en PSRAM para liberar Internal RAM para el Kernel lhOS
+# NimBLE en PSRAM para liberar Internal RAM (lhOS Kernel)
 CONFIG_BT_NIMBLE_MEM_ALLOC_MODE_EXTERNAL=y
 CONFIG_BT_NIMBLE_MAX_CONNECTIONS=3
 CONFIG_BT_NIMBLE_SVC_GAP_DEVICE_NAME="lhOS_S3"
-# Soporte para extensiones de datos Bluetooth 5
-CONFIG_BT_NIMBLE_HCI_UART_BAUD=460800
+CONFIG_BT_NIMBLE_MSYS_1_BLOCK_COUNT=12
+CONFIG_BT_NIMBLE_HCI_EVT_BUF_SIZE=70
 
 ########################################
-# WiFi & Networking
+# WiFi 6 & Networking
 ########################################
 CONFIG_ESP_WIFI_ENABLED=y
-# Habilitar soporte para WiFi 6 (Protocolo TWT y 802.11ax)
 CONFIG_ESP_WIFI_SOFTAP_SAE_SUPPORT=y
 CONFIG_ESP_WIFI_AMPDU_TX_ENABLED=y
 CONFIG_ESP_WIFI_AMPDU_RX_ENABLED=y
-# Buffers dinámicos para evitar overhead de memoria estática
 CONFIG_ESP_WIFI_DYNAMIC_TX_BUFFER=y
 CONFIG_ESP_WIFI_DYNAMIC_RX_BUFFER_NUM=32
 
 ########################################
-# Coexistencia (Radio Sharing)
+# Radio Coexistence (S3 Single-Radio)
 ########################################
-# Vital para que WiFi y BLE no colisionen en el S3
 CONFIG_ESP_COEX_SW_COEXIST_ENABLE=y
-# Preferencia a Bluetooth para evitar desconexiones en GATT
-CONFIG_BT_CTRL_COEX_PHY_CONFIG_SUPPORT=y
-CONFIG_ESP_COEX_PREFER_BT=y
+CONFIG_ESP_WIFI_SOFTAP_COEXISTENCE=y
 
 ########################################
-# FreeRTOS & System Performance
+# Kernel & Performance (C17 / FreeRTOS)
 ########################################
-# Frecuencia del Tick a 1000Hz para precisión de 1ms
 CONFIG_FREERTOS_HZ=1000
-# Monitor de Stack para robustez (FMEA)
-CONFIG_FREERTOS_WATCHDOG_ENABLE=y
-# Priorizar la ejecución en Core 1 para la lógica de lhOS
 CONFIG_FREERTOS_UNICORE=n
-# Habilitar soporte para C17 y optimizaciones de Xtensa
+CONFIG_COMPILER_OPTIMIZATION_SIZE=y
 CONFIG_COMPILER_CXX_EXCEPTIONS=n
 CONFIG_COMPILER_STACK_CHECK_MODE_NORM=y
+
+# Watchdog v5.x (FMEA Requirements)
+CONFIG_ESP_TASK_WDT_EN=y
+CONFIG_ESP_TASK_WDT_TIMEOUT_S=5
+
+########################################
+# Flash & Filesystem (LittleFS/NVS)
+########################################
+CONFIG_ESPTOOLPY_FLASHFREQ_40M=y
+CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
+CONFIG_ESPTOOLPY_FLASHSIZE_8MB=y
+CONFIG_LIBC_NEWLIB_NANO_FORMAT=y

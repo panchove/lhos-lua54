@@ -1,3 +1,3 @@
 idf_component_register(SRCS "lhos_wifi.c"
-                       INCLUDE_DIRS "."
-                       REQUIRES esp_wifi nvs_flash)
+                       INCLUDE_DIRS "include"
+                       REQUIRES esp_wifi esp_event esp_netif nvs_flash)

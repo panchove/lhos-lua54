@@ -1,6 +1,12 @@
+/* LHOS WiFi: single implementation using NVS and esp_event loop
+ * This file provides `lhos_wifi_init`, `lho s_wifi_deinit`,
+ * `lhos_wifi_connect`, `lhos_wifi_disconnect`, and `lhos_wifi_is_connected`.
+ */
+
 #include "lhos_wifi.h"
 #include "esp_event.h"
 #include "esp_log.h"
+#include "esp_netif.h"
 #include "esp_wifi.h"
 #include "nvs_flash.h"
 #include <string.h>
@@ -45,16 +51,20 @@ lhos_wifi_connect (const char *ssid, const char *password)
   ESP_LOGI (TAG, "Connecting to WiFi SSID: %s", ssid);
 
   wifi_config_t wifi_config = {
-        .sta = {
-            .threshold.authmode = WIFI_AUTH_WPA2_PSK,
-            .pmf_cfg = {
-                .capable = true,
-                .required = false
-            },
-        },
-    };
-  strcpy ((char *)wifi_config.sta.ssid, ssid);
-  strcpy ((char *)wifi_config.sta.password, password);
+    .sta = {
+      .threshold.authmode = WIFI_AUTH_WPA2_PSK,
+      .pmf_cfg = {
+        .capable = true,
+        .required = false,
+      },
+    },
+  };
+  if (ssid)
+    strncpy ((char *)wifi_config.sta.ssid, ssid,
+             sizeof (wifi_config.sta.ssid) - 1);
+  if (password)
+    strncpy ((char *)wifi_config.sta.password, password,
+             sizeof (wifi_config.sta.password) - 1);
 
   ESP_ERROR_CHECK (esp_wifi_set_mode (WIFI_MODE_STA));
   ESP_ERROR_CHECK (esp_wifi_set_config (WIFI_IF_STA, &wifi_config));
@@ -78,8 +88,6 @@ lhos_wifi_is_connected (void)
 {
   wifi_ap_record_t ap_info;
   if (esp_wifi_sta_get_ap_info (&ap_info) == ESP_OK)
-    {
-      return true;
-    }
+    return true;
   return false;
 }
