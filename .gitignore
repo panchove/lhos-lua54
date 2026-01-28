@@ -32,3 +32,4 @@ tests/unity/*.log
 secrets.env
 components/lua54/
 
+/components/lua54
